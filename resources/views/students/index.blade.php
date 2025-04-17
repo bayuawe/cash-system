@@ -14,45 +14,50 @@
                     Student</a>
             </div>
 
-            <table class="w-full table-auto border-collapse border border-gray-700 text-white">
-                <thead class="bg-gray-700">
-                    <tr>
-                        <th class="border px-4 py-2">#</th>
-                        <th class="border px-4 py-2">NIM</th>
-                        <th class="border px-4 py-2">Nama</th>
-                        <th class="border px-4 py-2">Jenis Kelamin</th>
-                        <th class="border px-4 py-2">No. HP</th>
-                        <th class="border px-4 py-2">Alamat</th>
-                        <th class="border px-4 py-2">Created At</th>
-                        <th class="border px-4 py-2">Updated At</th>
-                        <th class="border px-4 py-2">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-gray-800">
-                    @foreach ($students as $student)
+            <div class="overflow-x-auto">
+                <table class="min-w-[900px] table-auto border-collapse border border-gray-700 text-white">
+                    <thead class="bg-gray-700">
                         <tr>
-                            <td class="border px-4 py-2">{{ $loop->iteration }}</td>
-                            <td class="border px-4 py-2">{{ $student->nim }}</td>
-                            <td class="border px-4 py-2">{{ $student->name }}</td>
-                            <td class="border px-4 py-2">{{ $student->gender->name }}</td>
-                            <td class="border px-4 py-2">{{ $student->phone }}</td>
-                            <td class="border px-4 py-2">{{ $student->address }}</td>
-                            <td class="border px-4 py-2">{{ $student->created_at->format('d M Y') }}</td>
-                            <td class="border px-4 py-2">{{ $student->updated_at->format('d M Y') }}</td>
-                            <td class="border px-4 py-2">
-                                <a href="{{ route('students.edit', $student) }}"
-                                    class="text-blue-400 hover:underline">Edit</a>
-                                <form action="{{ route('students.destroy', $student) }}" method="POST" class="inline"
-                                    onsubmit="return confirm('Yakin hapus?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-red-400 hover:underline ml-2">Hapus</button>
-                                </form>
-                            </td>
+                            <th class="border px-4 py-2 whitespace-nowrap">#</th>
+                            <th class="border px-4 py-2 whitespace-nowrap">NIM</th>
+                            <th class="border px-4 py-2 whitespace-nowrap">Nama</th>
+                            <th class="border px-4 py-2 whitespace-nowrap">Jenis Kelamin</th>
+                            <th class="border px-4 py-2 whitespace-nowrap">No. HP</th>
+                            <th class="border px-4 py-2 whitespace-nowrap">Alamat</th>
+                            <th class="border px-4 py-2 whitespace-nowrap">Created At</th>
+                            <th class="border px-4 py-2 whitespace-nowrap">Updated At</th>
+                            <th class="border px-4 py-2 whitespace-nowrap">Aksi</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody class="bg-gray-800">
+                        @foreach ($students as $student)
+                            <tr>
+                                <td class="border px-4 py-2 whitespace-nowrap">{{ $loop->iteration }}</td>
+                                <td class="border px-4 py-2 whitespace-nowrap">{{ $student->nim }}</td>
+                                <td class="border px-4 py-2 whitespace-nowrap">{{ $student->name }}</td>
+                                <td class="border px-4 py-2 whitespace-nowrap">{{ $student->gender->name }}</td>
+                                <td class="border px-4 py-2 whitespace-nowrap">{{ $student->phone }}</td>
+                                <td class="border px-4 py-2 whitespace-nowrap">{{ $student->address }}</td>
+                                <td class="border px-4 py-2 whitespace-nowrap">
+                                    {{ $student->created_at->format('d M Y') }}</td>
+                                <td class="border px-4 py-2 whitespace-nowrap">
+                                    {{ $student->updated_at->format('d M Y') }}</td>
+                                <td class="border px-4 py-2 whitespace-nowrap">
+                                    <a href="{{ route('students.edit', $student) }}"
+                                        class="text-blue-400 hover:underline">Edit</a>
+                                    <form action="{{ route('students.destroy', $student) }}" method="POST"
+                                        class="inline" onsubmit="return confirm('Yakin hapus?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-red-400 hover:underline ml-2">Hapus</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     </div>
 </x-app-layout>

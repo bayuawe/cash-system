@@ -25,43 +25,51 @@
                     Tambah Pembayaran</a>
             </div>
 
-            <table class="w-full table-auto border-collapse border border-gray-700 text-white mt-6">
-                <thead class="bg-gray-700">
-                    <tr>
-                        <th class="border px-4 py-2">#</th>
-                        <th class="border px-4 py-2">Nama Siswa</th>
-                        <th class="border px-4 py-2">Pemasukan</th>
-                        <th class="border px-4 py-2">Pengeluaran</th>
-                        <th class="border px-4 py-2">Deskripsi</th>
-                        <th class="border px-4 py-2">Created At</th>
-                        <th class="border px-4 py-2">Updated At</th>
-                        <th class="border px-4 py-2">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-gray-800">
-                    @foreach ($cashBalances as $balance)
+            <div class="w-full overflow-x-auto"> <!-- Tambahkan kelas overflow-x-auto di sini -->
+                <table class="min-w-[800px] table-auto border-collapse border border-gray-700 text-white mt-6">
+                    <thead class="bg-gray-700">
                         <tr>
-                            <td class="border px-4 py-2">{{ $loop->iteration }}</td>
-                            <td class="border px-4 py-2">{{ $balance->student->name }}</td>
-                            <td class="border px-4 py-2">{{ number_format($balance->income, 0, ',', '.') }}</td>
-                            <td class="border px-4 py-2">{{ number_format($balance->expense, 0, ',', '.') }}</td>
-                            <td class="border px-4 py-2">{{ $balance->description }}</td>
-                            <td class="border px-4 py-2">{{ $balance->created_at->format('d M Y') }}</td>
-                            <td class="border px-4 py-2">{{ $balance->updated_at->format('d M Y') }}</td>
-                            <td class="border px-4 py-2">
-                                <a href="{{ route('cash-balances.edit', $balance) }}"
-                                    class="text-blue-400 hover:underline">Edit</a>
-                                <form action="{{ route('cash-balances.destroy', $balance) }}" method="POST"
-                                    class="inline" onsubmit="return confirm('Yakin hapus?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-red-400 hover:underline ml-2">Hapus</button>
-                                </form>
-                            </td>
+                            <th class="border px-4 py-2 whitespace-nowrap">#</th>
+                            <th class="border px-4 py-2 whitespace-nowrap">Nama Siswa</th>
+                            <th class="border px-4 py-2 whitespace-nowrap">Pemasukan</th>
+                            <th class="border px-4 py-2 whitespace-nowrap">Pengeluaran</th>
+                            <th class="border px-4 py-2 whitespace-nowrap">Deskripsi</th>
+                            <th class="border px-4 py-2 whitespace-nowrap">Created At</th>
+                            <th class="border px-4 py-2 whitespace-nowrap">Updated At</th>
+                            <th class="border px-4 py-2 whitespace-nowrap">Aksi</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody class="bg-gray-800">
+                        @foreach ($cashBalances as $balance)
+                            <tr>
+                                <td class="border px-4 py-2 whitespace-nowrap">{{ $loop->iteration }}</td>
+                                <td class="border px-4 py-2 whitespace-nowrap">{{ $balance->student->name }}</td>
+                                <td class="border px-4 py-2 whitespace-nowrap">
+                                    {{ number_format($balance->income, 0, ',', '.') }}</td>
+                                <td class="border px-4 py-2 whitespace-nowrap">
+                                    {{ number_format($balance->expense, 0, ',', '.') }}</td>
+                                <td class="border px-4 py-2 whitespace-nowrap">{{ $balance->description }}</td>
+                                <td class="border px-4 py-2 whitespace-nowrap">
+                                    {{ $balance->created_at->format('d M Y') }}</td>
+                                <td class="border px-4 py-2 whitespace-nowrap">
+                                    {{ $balance->updated_at->format('d M Y') }}</td>
+                                <td class="border px-4 py-2 whitespace-nowrap">
+                                    <a href="{{ route('cash-balances.edit', $balance) }}"
+                                        class="text-blue-400 hover:underline">Edit</a>
+                                    <form action="{{ route('cash-balances.destroy', $balance) }}" method="POST"
+                                        class="inline" onsubmit="return confirm('Yakin hapus?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-red-400 hover:underline ml-2">Hapus</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+
         </div>
     </div>
 </x-app-layout>
